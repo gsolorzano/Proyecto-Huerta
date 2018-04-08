@@ -1,26 +1,82 @@
---Tabla que lleva la información de las estructuras de los árboles
-create table estructura(
-       id_estructura  number(6),
-       nombre           varchar2(20)constraint estructura_nombre not null,
-       descripcion      varchar2(150) constraint estructura_descripcion not null       
+--Xilema 
+create table xilema(
+       id_xilema        number(6),
+       nombre           varchar2(20)constraint xilema_nombre not null,
+       descripcion      varchar2(150) constraint xilema_descripcion not null       
 );
 
---Declaración primary keys y Foreign keys
-ALTER TABLE estructura
-  ADD CONSTRAINT pk_estructura PRIMARY KEY (id_estructura)
+ALTER TABLE xilema 
+  ADD CONSTRAINT pk_xilema PRIMARY KEY (id_xilema)
   USING INDEX
   TABLESPACE huerta_ind PCTFREE 20
   STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
 
---Comentarios de tabla y columna
-COMMENT on TABLE estructura
-is 'Tabla para determinar el tipo de corteza,xile y cambrium que poseen';
+--Cambium
+create table cambium(
+       id_cambium        number(6),
+       nombre           varchar2(20)constraint cambium_nombre not null,
+       descripcion      varchar2(150) constraint cambium_descripcion not null       
+);
 
-COMMENT on column estructura.id_estructura
+ALTER TABLE cambium
+  ADD CONSTRAINT pk_cambium PRIMARY KEY (id_cambium)
+  USING INDEX
+  TABLESPACE huerta_ind PCTFREE 20
+  STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);  
+  
+--Corteza 
+
+create table corteza (
+       id_corteza       number(6),
+       nombre           varchar2(20)constraint corteza_nombre not null,
+       descripcion      varchar2(150) constraint corteza_descripcion not null       
+);
+
+ALTER TABLE corteza
+  ADD CONSTRAINT pk_corteza PRIMARY KEY (id_corteza)
+  USING INDEX
+  TABLESPACE huerta_ind PCTFREE 20
+  STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);  
+
+
+---------------Comentarios
+COMMENT on TABLE xilema
+is 'Tabla para determinar el tipo de xilema';
+
+COMMENT on column xilema.id_xilema
 is 'Identificador primario de la estructura';
 
-COMMENT on column estructura.nombre
+COMMENT on column xilema.nombre
 is 'Columna para darle nombre a los tipos de estrucuta ';
  
-COMMENT on column estructura.descripcion
+COMMENT on column xilema.descripcion
+is 'Columna para explicar las caracteristicas de la estructura del arbol';
+
+
+
+
+COMMENT on TABLE cambium
+is 'Tabla para determinar el tipo de cambrium que poseen';
+
+COMMENT on column cambium.id_cambium
+is 'Identificador primario de la estructura';
+
+COMMENT on column cambium.nombre
+is 'Columna para darle nombre a los tipos de estrucuta ';
+ 
+COMMENT on column cambium.descripcion
+is 'Columna para explicar las caracteristicas de la estructura del arbol';
+
+
+
+COMMENT on TABLE corteza
+is 'Tabla para determinar el tipo de corteza que poseen';
+
+COMMENT on column corteza.id_corteza
+is 'Identificador primario de la estructura';
+
+COMMENT on column corteza.nombre
+is 'Columna para darle nombre a los tipos de estrucuta ';
+ 
+COMMENT on column corteza.descripcion
 is 'Columna para explicar las caracteristicas de la estructura del arbol';

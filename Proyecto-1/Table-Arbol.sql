@@ -1,4 +1,3 @@
---Tabla que lleva la información de los arboles
 create table arbol (
        id_arbol    number(6),
        nombre      varchar2(30) constraint arbol_nombre not null,
@@ -7,10 +6,11 @@ create table arbol (
        foto        varchar2(200) constraint foto_arbol not null,
        id_huerta   number(6)    constraint arbol_huerta not null,
        id_reproduccion  number(6) constraint arbol_reproduccion not null,
-       id_estructura    number(6) constraint arbol_estructura not null
+       id_xilema number(6) constraint arbol_xilema not null,
+       id_cambium number(6) constrint arbol_cambium not null,
+       id_corteza number(6) constraint arbol_corteza not null
 );
 
---Declaración primary keys y Foreign keys
 ALTER TABLE arbol
   ADD CONSTRAINT pk_arbol PRIMARY KEY (id_arbol)
   USING INDEX
@@ -32,7 +32,6 @@ ALTER TABLE arbol
       ADD CONSTRAINT fk_estructura_arbol FOREIGN KEY
       (id_estructura) REFERENCES estructura(id_estructura);
 
---Comentarios de tabla y columna
 COMMENT on TABLE arbol
 is 'Tabla para determinar los arboles que exsiten en las huertas';
 
