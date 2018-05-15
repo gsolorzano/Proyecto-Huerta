@@ -1,9 +1,8 @@
---Tabla que lleva la información de las hortalizas
 CREATE TABLE hortaliza(
   id_hortaliza NUMBER(6),
   nombre VARCHAR2(20) CONSTRAINT hortaliza_nombre NOT NULL,
   precio NUMBER(20) NOT NULL,
-  foto VARCHAR2(200) NOT NULL,
+  foto BLOB DEFAULT EMPTY_BLOB(),
   id_huerta NUMBER(6) NOT NULL,
   id_color NUMBER(6) NOT NULL,
   id_tipo NUMBER(6) NOT NULL,
@@ -11,7 +10,21 @@ CREATE TABLE hortaliza(
   id_caracteristica NUMBER(6)
 );
 
---Declaración primary keys y Foreign keys
+Alter table hortaliza
+      ADD  cantidad  number constraint cantidad_hortaliza_nn not null;
+
+Alter table hortaliza
+      add creado_por varchar2 (100);
+
+Alter table hortaliza
+      add fech_creacion date ;
+
+Alter table hortaliza
+      add editado_por varchar2 (100);
+
+Alter table hortaliza
+      add fech_edicion date ;
+
 ALTER TABLE hortaliza
       ADD CONSTRAINT pk_hortaliza PRIMARY KEY (id_hortaliza)
       USING INDEX
@@ -38,7 +51,6 @@ ALTER TABLE hortaliza
       ADD CONSTRAINT fk_propiedad_tipo FOREIGN KEY
       (id_propiedad) REFERENCES propiedad(id_propiedad);
 
---Comentarios de tabla y columna
 COMMENT ON TABLE hortaliza
 IS 'Tabla que contiene la informacion de las hortalizas';
 

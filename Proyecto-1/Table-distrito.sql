@@ -1,18 +1,21 @@
---Tabla que lleva la información de los distritos
 CREATE TABLE distrito(
   id_distrito NUMBER(6),
   nombre  VARCHAR2(20) CONSTRAINT distrito_nombre NOT NULL,
   id_canton NUMBER(6) NOT NULL
 );
 
---Declaración primary keys y Foreign keys
 ALTER TABLE distrito
       ADD CONSTRAINT pk_distrito PRIMARY KEY (id_distrito)
       USING INDEX
       TABLESPACE huerta_Ind PCTFREE 20
       STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
       
---Comentarios de tabla y columna
+Alter table distrito
+      add creado_por varchar2 (100);
+
+Alter table distrito
+      add fech_creacion date ;
+      
 ALTER TABLE distrito
       ADD CONSTRAINT fk_distrito_canton FOREIGN KEY
       (id_canton) REFERENCES canton(id_canton);

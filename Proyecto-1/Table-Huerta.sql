@@ -1,13 +1,12 @@
---Tabla que lleva la información de las huertas
 CREATE TABLE huerta(
   id_huerta NUMBER(6),
   nombre  VARCHAR2(20) CONSTRAINT huerta_nombre NOT NULL,
-  latitud NUMBER(3,8) NOT NULL,
-  longitud NUMBER(3,8) NOT NULL,
-  id_distrito NUMBER(6) NOT NULL
+  latitud NUMBER(5,15) NOT NULL,
+  longitud NUMBER(5,15) NOT NULL,
+  id_distrito NUMBER(6) NOT NULL,
+  capital NUMBER(10)
 );
 
---Declaración primary keys y Foreign keys
 ALTER TABLE huerta
       ADD CONSTRAINT pk_huerta PRIMARY KEY (id_huerta)
       USING INDEX
@@ -17,8 +16,19 @@ ALTER TABLE huerta
 ALTER TABLE huerta
       ADD CONSTRAINT fk_huerta_distrito FOREIGN KEY
       (id_distrito) REFERENCES distrito(id_distrito);
-     
---Comentarios de tabla y columna 
+
+Alter table huerta
+      add creado_por varchar2 (100);
+
+Alter table huerta
+      add fech_creacion date ;
+
+Alter table huerta
+      add editado_por varchar2 (100);
+
+Alter table huerta
+      add fech_edicion date ;
+      
 COMMENT ON TABLE huerta
 IS 'Tabla que contiene la informacion de la huerta';
 

@@ -3,13 +3,28 @@ create table arbol (
        nombre      varchar2(30) constraint arbol_nombre not null,
        precio      number(10)   constraint arbol_precio not null,
        extincion   number(1)    constraint arbol_extincion not null,
-       foto        varchar2(200) constraint foto_arbol not null,
+       foto        BLOB DEFAULT EMPTY_BLOB(),
        id_huerta   number(6)    constraint arbol_huerta not null,
        id_reproduccion  number(6) constraint arbol_reproduccion not null,
        id_xilema number(6) constraint arbol_xilema not null,
-       id_cambium number(6) constrint arbol_cambium not null,
+       id_cambium number(6) constraint arbol_cambium not null,
        id_corteza number(6) constraint arbol_corteza not null
 );
+
+Alter table arbol
+      add foto BLOB DEFAULT EMPTY_BLOB();
+
+Alter table arbol 
+      add creado_por varchar2 (100);
+
+Alter table arbol
+      add fech_creacion date ;
+
+Alter table arbol
+      add editado_por varchar2 (100);
+
+Alter table arbol 
+      add fech_edicion date ;
 
 ALTER TABLE arbol
   ADD CONSTRAINT pk_arbol PRIMARY KEY (id_arbol)
@@ -30,7 +45,15 @@ ALTER TABLE arbol
 
 ALTER TABLE arbol
       ADD CONSTRAINT fk_estructura_arbol FOREIGN KEY
-      (id_estructura) REFERENCES estructura(id_estructura);
+      (id_xilema) REFERENCES xilema(id_xilema);
+      
+ALTER TABLE arbol
+      ADD CONSTRAINT fk_cambium_arbol FOREIGN KEY
+      (id_cambium) REFERENCES cambium(id_cambium);
+      
+ALTER TABLE arbol
+      ADD CONSTRAINT fk_corteza_arbol FOREIGN KEY
+      (id_corteza) REFERENCES corteza(id_corteza);
 
 COMMENT on TABLE arbol
 is 'Tabla para determinar los arboles que exsiten en las huertas';
@@ -55,6 +78,3 @@ is 'Columna para brindar la informacion en cual huerta se presenta el arbol ';
 
 COMMENT on column arbol.id_reproduccion
 is 'Columna para brindar la informacion cual es el tipo de reproduccion del arbol';
-
-COMMENT on column arbol.id_estructura 
-is 'Columna para brindar la informacion de la estructura del arbol';

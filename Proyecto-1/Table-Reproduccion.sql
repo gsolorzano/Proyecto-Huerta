@@ -1,18 +1,21 @@
---Tabla que lleva la información del tipo de reproducción de los árboles
 create table reproduccion(
        id_reproduccion  number(6),
        nombre           varchar2(20) constraint reproduccion_nombre not null,
-       descripcion      varchar2(150) constraint reproduccion_descripcion not null        
+       descripcion      varchar2(300) constraint reproduccion_descripcion not null        
 );
 
---Declaración primary keys y Foreign keys
+Alter table reproduccion
+      add creado_por varchar2 (100);
+
+Alter table reproduccion
+      add fech_creacion date ;
+
 ALTER TABLE reproduccion
   ADD CONSTRAINT pk_reproduccion PRIMARY KEY (id_reproduccion)
   USING INDEX
   TABLESPACE huerta_ind PCTFREE 20
   STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
 
---Comentarios de tabla y columna
 COMMENT on TABLE reproduccion
 is 'Tabla para dividir los metodos de reproduccion de los arboles';
 

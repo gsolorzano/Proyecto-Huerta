@@ -1,10 +1,20 @@
---Tabla que lleva la información de los abonos por hortalizas
 CREATE TABLE hortaliza_x_abono(
   id_abono NUMBER(6),
-  id_hortaliza NUMBER(6)
+  id_hortaliza NUMBER(6),
+  fecha date,
+  id_bitacora number
 );
 
---Declaración primary keys y Foreign keys
+ALTER TABLE hortaliza_x_abono
+      ADD CONSTRAINT fk_idbitacora_HAbono FOREIGN KEY
+      (id_bitacora) REFERENCES bitacora_abono(id_bitacora);
+
+Alter table hortaliza_x_abono
+      add creado_por varchar2 (100);
+
+Alter table hortaliza_x_abono
+      add fech_creacion date ;
+
 ALTER TABLE hortaliza_x_abono
       ADD CONSTRAINT pk_hortaliza_x_abono PRIMARY KEY (id_hortaliza, id_abono)
       USING INDEX
@@ -18,8 +28,7 @@ ALTER TABLE hortaliza_x_abono
 ALTER TABLE hortaliza_x_abono
       ADD CONSTRAINT fk_hortaliza_x_abono FOREIGN KEY
       (id_hortaliza) REFERENCES hortaliza(id_hortaliza);
-    
---Comentarios de tabla y columna  
+      
 COMMENT ON TABLE hortaliza_x_abono
 IS 'Tabla que contiene la informacion de los abonos por hortalizas';
 

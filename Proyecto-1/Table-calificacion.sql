@@ -1,13 +1,18 @@
---Tabla que lleva la información de las calificaciones de las huertas
 CREATE TABLE calificacion(
   id_calificacion NUMBER(6),
   puntuacion NUMBER(6) NOT NULL,
   comentario VARCHAR2(100),
   fecha DATE DEFAULT SYSDATE CONSTRAINT calificacion_fecha NOT NULL,
-  id_huerta NUMBER(6) NOT NULL
+  id_huerta NUMBER(6) NOT NULL,
+  id_persona number(6)
 );
 
---Declaración primary keys y Foreign keys
+Alter table calificacion
+      add creado_por varchar2 (100);
+
+Alter table calificacion
+      add fech_creacion date ;
+
 ALTER TABLE calificacion
       ADD CONSTRAINT pk_calificacion PRIMARY KEY (id_calificacion)
       USING INDEX
@@ -17,8 +22,11 @@ ALTER TABLE calificacion
 ALTER TABLE calificacion
       ADD CONSTRAINT fk_calificacion_huerta FOREIGN KEY
       (id_huerta) REFERENCES huerta(id_huerta);
- 
---Comentarios de tabla y columna     
+     
+ALTER TABLE calificacion
+      ADD CONSTRAINT fk_calificacion_persona FOREIGN KEY
+      (id_persona) REFERENCES persona(id_persona);
+      
 COMMENT ON TABLE calificacion
 IS 'Tabla que contiene la informacion de la calificacion';
 

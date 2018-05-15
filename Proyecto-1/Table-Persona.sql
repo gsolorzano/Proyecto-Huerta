@@ -1,22 +1,35 @@
---Tabla que lleva la información de las personas en general
 create table persona (
        cedula   number(10),
        name     varchar2(20) constraint name_persona not null,
        email    VARCHAR2(25) CONSTRAINT employee_email_nn NOT NULL,
-                CONSTRAINT   employee_email_uk   UNIQUE (email),
        telefono number(10) NOT NULL,
        fechaNac date DEFAULT SYSDATE CONSTRAINT fecha_persona_nn NOT NULL,
        nacionalidad number (6) NOT NULL,
        foto     varchar2(200) constraint foto_persona not null,
-       interesado number(1) NOT NULL,
        id_huerta number(6) NOT NULL,
        id_dedicacion number(6) NOT NULL,
-       id_usuario    number(6) NOT NULL
+       id_usuario    number(6) NOT NULL,
+       last_name VARCHAR2(25) constraint lastname_persona not null,
+       id_persona number(6) constraint id_persona not null
 );
 
---Declaración primary keys y Foreign keys
+Alter table persona
+      add foto BLOB DEFAULT EMPTY_BLOB();
+
+Alter table persona
+      add creado_por varchar2 (100);
+
+Alter table persona
+      add fech_creacion date ;
+
+Alter table persona
+      add editado_por varchar2 (100);
+
+Alter table persona
+      add fech_edicion date ;
+
 ALTER TABLE persona
-  ADD CONSTRAINT pk_persona PRIMARY KEY (cedula)
+  ADD CONSTRAINT pk_persona PRIMARY KEY (id_persona)
   USING INDEX
   TABLESPACE huerta_ind PCTFREE 20
   STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
@@ -28,12 +41,11 @@ ALTER TABLE persona
 ALTER TABLE persona
       ADD CONSTRAINT fk_usuario_persona FOREIGN KEY
       (id_usuario) REFERENCES usuario(id_usuario);
-      
+
 ALTER TABLE persona
       ADD CONSTRAINT fk_dedicacion_persona FOREIGN KEY
       (id_dedicacion) REFERENCES dedicacion(id_dedicacion);
 
---Comentarios de tabla y columna
 COMMENT ON TABLE persona
 is 'Tabla que contiene las personas de las huertas';
 
